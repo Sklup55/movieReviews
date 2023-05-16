@@ -1,0 +1,2 @@
+# Omit "node_modules" folder updates from git clones, pushes etc.
+node_modules
