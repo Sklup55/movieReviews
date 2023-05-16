@@ -1,7 +1,6 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
-// Import the movies_db/js file/module
-
+let books = require("./movies_db.js");
 const regd_users = express.Router();
 
 let users = [];
