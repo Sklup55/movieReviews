@@ -1,86 +1,35 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
-let movies = require("./movies_db.js");
+// Import the movies_db/js file/module
+
 const regd_users = express.Router();
 
 let users = [];
 
+// This function checks the username validity, and is further used in Task 6 (in general.js)
 const isValid = (username)=>{
-  let userwithsamename = users.filter((user)=>{
-    return user.username === username
-  });
-  if(userwithsamename.length > 0){
-    return true;
-  } else {
-    return false;
-  }
+// Add the code here
 }
 
+// This function checks the username and password provided, and is used further in Task 7
 const authenticatedUser = (username,password)=>{
-  let validUser = users.filter((user)=>{
-    return (user.username === username && user.password === password)
-  });
-  if(validUser.length > 0){
-    return true;
-  } else {
-    return false;
-  }
+// Add the code here
 }
 
-//Login for registered users
+//Logging in as a registered user (Task 7)
 regd_users.post("/login", (req,res) => {
-  const username = req.body.username;
-  const password = req.body.password;
-  if (!username || !password) {
-        return res.status(404).json({message: "Error logging in!"});
-    }
-    if (authenticatedUser(username,password)) {
-      let accessToken = jwt.sign({
-          data: password
-        }, 'access', { expiresIn: 60 * 20 });
-        req.session.authorization = {
-          accessToken, username
-
-      }
-      return res.status(200).send("User successfully logged in!");
-    } else {
-      return res.status(208).send("Incorrect Login. Please Check the credentials entered!");
-    }
+// Add the code here
 });
 
-// Add or Update a review for a movie by its ID
+// Adding or modifying a review for a movie by its ID (Task 8)
 regd_users.put("/auth/review/:id", (req, res) => {
-
-  const id = req.params.id;
-  let filtered_movie = movies[id]
-  if (filtered_movie) {
-      let review = req.query.review;
-      let reviewer = req.session.authorization['username'];
-      if(review) {
-        filtered_movie['reviews'][reviewer] = review;
-          movies[id] = filtered_movie;
-      }
-      res.send(`Review for the movie with ID  ${id} added/updated!`);
-  }
-  else{
-      res.send("Unable to find this movie!");
-  }
+// Add the code here
 });
 
 
-// Deleting a movie review
-
+// Deleting a movie review (Task 9)
 regd_users.delete("/auth/review/:id", (req, res) => {
-    const id = req.params.id;
-    let reviewer = req.session.authorization['username'];
-    let filtered_review = movies[id]["reviews"];
-    if (filtered_review[reviewer]){
-        delete filtered_review[reviewer];
-        res.send(`Reviews for movie ID  ${id} posted by user: ${reviewer} deleted!`);
-    }
-    else{
-        res.send("Can't delete, as this review has been posted by a different user!");
-    }
+  // Add the code here
     });
 
 
