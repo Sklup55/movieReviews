@@ -1,6 +1,6 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
-let books = require("./movies_db.js");
+let movies = require("./movies_db.js");
 const regd_users = express.Router();
 
 let users = [];
